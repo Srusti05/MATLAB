@@ -1,0 +1,25 @@
+% Constants
+v0 = 250; % Initial velocity (m/s)
+theta = deg2rad(65); % Launch angle (radians)
+g = 9.81; % Acceleration due to gravity (m/s^2)
+v_wind = 30; % Wind speed (m/s)
+
+% Time of flight
+t_flight = 2 * v0 * sin(theta) / g; % Total time (s)
+t = linspace(0, t_flight, 100); % Time vector
+
+% Trajectory without wind
+x_no_wind = v0 * cos(theta) * t; % Horizontal distance (m)
+y_no_wind = v0 * sin(theta) * t - 0.5 * g * t.^2; % Vertical distance (m)
+
+% Trajectory with wind
+x_with_wind = x_no_wind + v_wind * t; % Horizontal distance (m)
+y_with_wind = y_no_wind; % Vertical distance (m)
+
+% Plot trajectories
+figure;
+plot(x_no_wind, y_no_wind, 'b', 'LineWidth', 2); hold on;
+plot(x_with_wind, y_with_wind, 'r--', 'LineWidth', 2);
+xlabel('Horizontal Distance (m)'); ylabel('Vertical Distance (m)');
+title('Projectile Trajectory');
+legend('No Wind', 'With Wind'); grid on;
