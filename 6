@@ -1,0 +1,31 @@
+% Constants
+initial_balance = 300000; % Initial deposit ($)
+withdrawal = 25000; % First-year withdrawal ($)
+interest_rate = 0.05; % Annual interest rate
+inflation_rate = 0.02; % Annual inflation rate
+
+% Initialization
+balance = initial_balance;
+year = 0;
+withdrawals = [];
+balances = [];
+
+% Loop to calculate balance and withdrawals
+while balance > 0
+    year = year + 1;
+    balance = balance * (1 + interest_rate) - withdrawal;
+    withdrawals = [withdrawals, withdrawal];
+    balances = [balances, max(balance, 0)]; % Ensure no negative balance
+    withdrawal = withdrawal * (1 + inflation_rate);
+end
+
+% Plot results
+figure;
+plot(1:year, withdrawals, 'b', 'LineWidth', 2); hold on;
+plot(1:year, balances, 'r', 'LineWidth', 2);
+xlabel('Year'); ylabel('Amount ($)');
+title('Yearly Withdrawals and Account Balance');
+legend('Withdrawals', 'Balance'); grid on;
+
+% Output the number of years the money lasts
+fprintf('The money will last for %d years.\n', year);
