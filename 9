@@ -1,0 +1,22 @@
+% Given data
+weight = 15; % Weight of the box in pounds
+specific_weight_aluminum = 0.101; % Specific weight of aluminum in lb/in^3
+
+% Outer dimensions of the box
+length = 24; % in
+width = 12; % in
+height = 4; % in
+
+% Derive volume factor from geometry
+bottom_area = length * width; % Area of the bottom
+side_area_long = 2 * (length * height); % Combined area of two long sides
+side_area_short = 2 * (width * height); % Combined area of two short sides
+total_area = bottom_area + side_area_long + side_area_short; % Total area
+
+% Relationship between weight and thickness
+% Weight = Specific Weight * Volume
+% Volume = Total Area * Thickness
+thickness = weight / (specific_weight_aluminum * total_area);
+
+% Display the result
+fprintf('The wall thickness x is %.4f inches.\n', thickness);
